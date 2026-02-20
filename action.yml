@@ -1,0 +1,32 @@
+name: "docutil"
+description: "Enterprise Document Utility Toolkit GitHub Action"
+
+author: "Richie Garafola"
+
+branding:
+  icon: file-text
+  color: blue
+
+inputs:
+  command:
+    description: "docutil command to execute"
+    required: true
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install docutil
+      shell: bash
+      run: |
+        pip install docutil
+
+    - name: Run docutil
+      shell: bash
+      run: |
+        docutil ${{ inputs.command }}
